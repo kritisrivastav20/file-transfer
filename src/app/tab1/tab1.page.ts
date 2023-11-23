@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@awesome-cordova-plugins/file-transfer/ngx';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +9,33 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  fileTransfer: FileTransferObject = this.transfer.create();
+  @Input() name?: string;
 
+  constructor(private transfer: FileTransfer, private platform: Platform) {
+    console.log('here')
+   }
+
+  uploadFilesFromDevice() {
+    console.log('not available')
+
+    if (this.platform.is('cordova')) {
+      let options: FileUploadOptions = {
+        chunkedMode: false,
+        fileKey: 'file',
+        fileName: 'filename.jpg',
+      }
+
+      this.fileTransfer.upload('&lt;file path>', '&lt;api endpoint>', options)
+        .then((data) => {
+          console.log(data)
+        }, (err) => {
+        })
+    } else {
+      console.log('not available')
+    }
+
+  }
 }
+
+
