@@ -15,26 +15,5 @@ export class ExploreContainerComponent {
   constructor(private transfer: FileTransfer, private platform: Platform) {
     console.log('here')
    }
-
-  uploadFilesFromDevice() {
-    console.log('not available')
-
-    if (this.platform.is('cordova')) {
-      let options: FileUploadOptions = {
-        chunkedMode: false,
-        fileKey: 'file',
-        fileName: 'filename.jpg',
-      }
-
-      this.fileTransfer.upload('&lt;file path>', '&lt;api endpoint>', options)
-        .then((data) => {
-          console.log(data)
-        }, (err) => {
-        })
-    } else {
-      console.log('not available')
-    }
-
-  }
 }
 
